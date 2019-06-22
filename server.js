@@ -1,16 +1,26 @@
 //Dependencies:
-var express = require('express');
-var path = require("path");
+var express = require('express')
+var app = express()
+var bodyParser = require('body-parser')
 
-var app = express();
+
 var PORT = process.env.PORT || 8080;
 
-//Express app set up
-app.use(express.static(__dirname + '/app'));
+ 
+// create application/x-www-form-urlencoded parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
-//Routes to connect to the server
-require("./app/routing/apiRoutes")(app);
-require("./app/routing/htmlRoutes")(app)
+//parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json'}))
+
+//parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type'}))
+
+//parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html'}))
+
+require("./app/routing/api-routes.js")(app);
+require("./app/routing/html-routes.js")(app);
 
 // Starts the server to begin listening
 app.listen(PORT, function () {
