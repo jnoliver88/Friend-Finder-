@@ -19,7 +19,7 @@
   "homepage": "https://github.com/jnoliver88/Friend-Finder-#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-handlebars": "^3.0.0",
     "parse-json": "^4.0.0",
     "path": "^0.12.7"
